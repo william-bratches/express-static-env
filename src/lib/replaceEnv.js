@@ -1,10 +1,8 @@
 const fs = require('fs');
 
 const replaceEnvInString = (content, env, cb) => {
-  // build list of process.env
-  // for every item in the list, break apart, match in actual env object
-  // if match, replace, keeping reference to origin (key: value)
-  // go through string again, replacing old string with new value
+  // go through each process.env
+  // regex replace string process.env. + KEY
 
   cb(data);
 
