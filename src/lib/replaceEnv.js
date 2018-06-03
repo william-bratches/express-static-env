@@ -4,8 +4,10 @@ const replaceEnvInString = (content, env, cb) => {
   const data = Object.keys(env).reduce((acc, next) => {
     const value = `"${env[next]}"`;
     const match = `process.env.${next}`;
-    return acc.slice().replace(match, value);
+    return acc.replace(match, value);
   }, content.slice());
+
+  console.log(data);
 
   // TODO a path to turn remaining stragglers into undefined
   cb(data);
