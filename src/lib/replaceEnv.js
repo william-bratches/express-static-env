@@ -7,10 +7,11 @@ const replaceEnvInString = (content, env, cb) => {
     return acc.replace(match, value);
   }, content.slice());
 
-  console.log(data);
-
   // TODO a path to turn remaining stragglers into undefined
-  cb(data);
+  // space or semicolon
+  const unknownMatch = 'some regex wildcad statement';
+  const cleanedData = data.replace(unknownMatch, undefined);
+  cb(cleanedData);
 }
 
 const readAndReplaceStaticFile = (filePath, envOverride, cb) => {
