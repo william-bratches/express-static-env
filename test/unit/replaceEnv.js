@@ -1,3 +1,5 @@
+const { expect } = require('chai');
+
 const { replaceEnvInString } = require('../../src/lib/replaceEnv');
 const { testFile1 } = require('../fixtures/javascript');
 const { fixedTestFile1 } = require('../fixtures/fixedJavascript');

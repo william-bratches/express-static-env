@@ -1,11 +1,11 @@
 const fs = require('fs');
 
 const replaceEnvInString = (content, env, cb) => {
-  Object.keys(env).reduce((acc, next) => {
-    const value = env[next];
+  const data = Object.keys(env).reduce((acc, next) => {
+    const value = `"${env[next]}"`;
     const match = `process.env.${next}`;
-    return content.replace(match, value);
-  }, '');
+    return acc.slice().replace(match, value);
+  }, content.slice());
 
   // TODO a path to turn remaining stragglers into undefined
   cb(data);
@@ -25,9 +25,7 @@ const readAndReplaceStaticFile = (filePath, envOverride, cb) => {
   });
 }
 
-modul
-
-module.expots = {
+module.exports = {
   readAndReplaceStaticFile,
   replaceEnvInString,
 }
