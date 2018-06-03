@@ -1,15 +1,14 @@
 const fs = require('fs');
 
 const replaceEnvInString = (content, env, cb) => {
-  // TODO: use reducer instead
-  for (key in env) {
-    // regex replace string process.env. + KEY
-    content.replace()
-  }
+  Object.keys(env).reduce((acc, next) => {
+    const value = env[next];
+    const match = `process.env.${next}`;
+    return content.replace(match, value);
+  }, '');
 
+  // TODO a path to turn remaining stragglers into undefined
   cb(data);
-
-  // TODO: still need a way to replace valid code only...
 }
 
 const readAndReplaceStaticFile = (filePath, envOverride, cb) => {
