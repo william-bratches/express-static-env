@@ -9,7 +9,7 @@ const replaceEnvInString = (content, env, cb) => {
 
   const envMatch = /(?=process.env)(.*)(?=\b)/;
 
-  // if no match, replace with undefined
+  // replace non-matches with undefined
   let cleanedData = data.slice();
   while (envMatch.test(cleanedData)) {
     cleanedData = cleanedData.replace(envMatch, undefined);
