@@ -18,9 +18,8 @@ const replaceEnvInString = (content, env, cb) => {
   cb(cleanedData);
 }
 
-const readAndReplaceStaticFile = (filePath, envOverride, cb) => {
-  const env = Object.assign({}, process.env, envOverride);
-
+// TODO - make last argument always a callback dynamically
+const readAndReplaceStaticFile = (filePath, env = process.env, cb) => {
   fs.readFile(filePath, (err, data) => {
     if (err) {
       throw err;
