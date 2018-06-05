@@ -7,10 +7,14 @@ const replaceEnvInString = (content, env, cb) => {
     return acc.replace(match, value);
   }, content.slice());
 
-  // TODO a path to turn remaining stragglers into undefined
-  // space or semicolon
-  const unknownMatch = 'some regex wildcad statement';
-  const cleanedData = data.replace(unknownMatch, undefined);
+  const envMatch = /(?=process.env)(.*)(?=\b)/;
+
+  // if no match, replace with undefined
+  let cleanedData = data.slice();
+  while (envMatch.test(cleanedData)) {
+    cleanedData = cleanedData.replace(envMatch, undefined);
+  }
+
   cb(cleanedData);
 }
 
