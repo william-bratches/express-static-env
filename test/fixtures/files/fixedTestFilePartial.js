@@ -1,4 +1,4 @@
-const API_PATH = 'API_PATH';
+const API_PATH = "API_PATH";
 
 const FOO_BAR = undefined;
 

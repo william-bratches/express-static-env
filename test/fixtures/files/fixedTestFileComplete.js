@@ -1,6 +1,6 @@
-const API_PATH = 'API_PATH';
+const API_PATH = "API_PATH";
 
-const FOO_BAR = 'FOO_BAR';
+const FOO_BAR = "FOO_BAR";
 
 function hello() {
   return 'hello!';

@@ -32,7 +32,7 @@ describe('replacer', () => {
       FOO_BAR: 'FOO_BAR',
       API_PATH: 'API_PATH',
     }, (data) => {
-      const fixedFile = fs.readFileSync(solutionPath);
+      const fixedFile = fs.readFileSync(solutionPath).toString();
       expect(data).to.equal(fixedFile);
       done();
     });
