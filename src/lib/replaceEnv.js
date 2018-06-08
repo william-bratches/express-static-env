@@ -29,11 +29,11 @@ const readAndReplaceStaticFile = (filePath, env = process.env, callback) => {
 
   fs.readFile(filePath, (err, buffer) => {
     if (err) {
-      throw err;
+      cb(err);
     }
 
     return replaceEnvInString(buffer.toString(), env, (data) => {
-      cb(data);
+      cb(null, data);
     });
   });
 }

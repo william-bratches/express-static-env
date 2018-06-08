@@ -31,7 +31,7 @@ describe('replacer', () => {
     readAndReplaceStaticFile(fixturePath, {
       FOO_BAR: 'FOO_BAR',
       API_PATH: 'API_PATH',
-    }, (data) => {
+    }, (err, data) => {
       const fixedFile = fs.readFileSync(solutionPath).toString();
       expect(data).to.equal(fixedFile);
       done();
@@ -44,7 +44,7 @@ describe('replacer', () => {
 
     readAndReplaceStaticFile(fixturePath, {
       API_PATH: 'API_PATH',
-    }, (data) => {
+    }, (err, data) => {
       const fixedFile = fs.readFileSync(solutionPath).toString();
       expect(data).to.equal(fixedFile);
       done();
@@ -55,7 +55,7 @@ describe('replacer', () => {
     const fixturePath = path.resolve(__dirname, '../fixtures/files/testFile.js');
     const solutionPath = path.resolve(__dirname, '../fixtures/files/testFileUndefined.js');
 
-    readAndReplaceStaticFile(fixturePath, (data) => {
+    readAndReplaceStaticFile(fixturePath, (err, data) => {
       const fixedFile = fs.readFileSync(solutionPath).toString();
       expect(data).to.equal(fixedFile);
       done();
