@@ -37,4 +37,28 @@ describe('replacer', () => {
       done();
     });
   });
+
+  it('Should do partial replacements', (done) => {
+    const fixturePath = path.resolve(__dirname, '../fixtures/files/testFile.js');
+    const solutionPath = path.resolve(__dirname, '../fixtures/files/fixedTestFilePartial.js');
+
+    readAndReplaceStaticFile(fixturePath, {
+      API_PATH: 'API_PATH',
+    }, (data) => {
+      const fixedFile = fs.readFileSync(solutionPath).toString();
+      expect(data).to.equal(fixedFile);
+      done();
+    });
+  });
+
+  it('Can still function with no env provided', (done) => {
+    const fixturePath = path.resolve(__dirname, '../fixtures/files/testFile.js');
+    const solutionPath = path.resolve(__dirname, '../fixtures/files/testFileUndefined.js');
+
+    readAndReplaceStaticFile(fixturePath, (data) => {
+      const fixedFile = fs.readFileSync(solutionPath).toString();
+      expect(data).to.equal(solutionPath);
+      done();
+    });
+  });
 });
