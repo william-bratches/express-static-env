@@ -20,12 +20,12 @@ const replaceEnvInString = (content, env, cb) => {
 
 // TODO - make last argument always a callback dynamically
 const readAndReplaceStaticFile = (filePath, env = process.env, cb) => {
-  fs.readFile(filePath, (err, data) => {
+  fs.readFile(filePath, (err, buffer) => {
     if (err) {
       throw err;
     }
 
-    return replaceEnvInString(content, env, (data) => {
+    return replaceEnvInString(buffer.toString(), env, (data) => {
       cb(data);
     });
   });

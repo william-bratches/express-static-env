@@ -25,14 +25,14 @@ describe('replacer', () => {
   });
 
   it('Should replace given a static file path', (done) => {
-    const fixturePath = path.resolve(__dirname, '../fixtures/javascript/files/testFile.js');
-    const solutionPath = path.resolve(__dirname, '../fixtures/javascript/files/fixedTestFileComplete.js');
+    const fixturePath = path.resolve(__dirname, '../fixtures/files/testFile.js');
+    const solutionPath = path.resolve(__dirname, '../fixtures/files/fixedTestFileComplete.js');
 
     readAndReplaceStaticFile(fixturePath, {
       FOO_BAR: 'FOO_BAR',
       API_PATH: 'API_PATH',
     }, (data) => {
-      const fixedFile = fs.readFileSync(solutionPath)
+      const fixedFile = fs.readFileSync(solutionPath);
       expect(data).to.equal(fixedFile);
       done();
     });
