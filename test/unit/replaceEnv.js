@@ -57,7 +57,7 @@ describe('replacer', () => {
 
     readAndReplaceStaticFile(fixturePath, (data) => {
       const fixedFile = fs.readFileSync(solutionPath).toString();
-      expect(data).to.equal(solutionPath);
+      expect(data).to.equal(fixedFile);
       done();
     });
   });

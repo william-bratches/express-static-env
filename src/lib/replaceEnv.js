@@ -1,5 +1,10 @@
 const fs = require('fs');
 
+// stack overflow copypasta
+const isFunction = (functionToCheck) => {
+ return functionToCheck && {}.toString.call(functionToCheck) === '[object Function]';
+}
+
 const replaceEnvInString = (content, env, cb) => {
   const data = Object.keys(env).reduce((acc, next) => {
     const value = `"${env[next]}"`;
@@ -19,7 +24,9 @@ const replaceEnvInString = (content, env, cb) => {
 }
 
 const readAndReplaceStaticFile = (filePath, env = process.env, callback) => {
-  const cb = callback || arguments[arguments.length - 2];
+  // allow for optional env argument
+  const cb = callback || (isFunction(env) && env) || (() => {});
+
   fs.readFile(filePath, (err, buffer) => {
     if (err) {
       throw err;
