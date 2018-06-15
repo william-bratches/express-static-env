@@ -2,7 +2,7 @@ const { expect } = require('chai');
 const path = require('path');
 const fs = require('fs');
 
-const { replaceEnvInString, readAndReplaceStaticFile } = require('../../src/lib/replaceEnv');
+const { replaceEnvInString, modifyContent } = require('../../src/lib/replaceEnv');
 const { testFile1 } = require('../fixtures/javascript');
 const { fixedTestFile1, fixedUndefinedTestFile1 } = require('../fixtures/fixedJavascript');
 
@@ -28,7 +28,7 @@ describe('replacer', () => {
     const fixturePath = path.resolve(__dirname, '../fixtures/files/testFile.js');
     const solutionPath = path.resolve(__dirname, '../fixtures/files/fixedTestFileComplete.js');
 
-    readAndReplaceStaticFile(fixturePath, {
+    modifyContent(fixturePath, {
       FOO_BAR: 'FOO_BAR',
       API_PATH: 'API_PATH',
     }, (err, data) => {
@@ -42,7 +42,7 @@ describe('replacer', () => {
     const fixturePath = path.resolve(__dirname, '../fixtures/files/testFile.js');
     const solutionPath = path.resolve(__dirname, '../fixtures/files/fixedTestFilePartial.js');
 
-    readAndReplaceStaticFile(fixturePath, {
+    modifyContent(fixturePath, {
       API_PATH: 'API_PATH',
     }, (err, data) => {
       const fixedFile = fs.readFileSync(solutionPath).toString();
@@ -55,7 +55,7 @@ describe('replacer', () => {
     const fixturePath = path.resolve(__dirname, '../fixtures/files/testFile.js');
     const solutionPath = path.resolve(__dirname, '../fixtures/files/testFileUndefined.js');
 
-    readAndReplaceStaticFile(fixturePath, (err, data) => {
+    modifyContent(fixturePath, (err, data) => {
       const fixedFile = fs.readFileSync(solutionPath).toString();
       expect(data).to.equal(fixedFile);
       done();

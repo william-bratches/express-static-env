@@ -23,7 +23,7 @@ const replaceEnvInString = (content, env, cb) => {
   cb(cleanedData);
 }
 
-const readAndReplaceStaticFile = (filePath, env = process.env, callback) => {
+const modifyContent = (filePath, env = process.env, callback) => {
   // allow for optional env argument
   const cb = callback || (isFunction(env) && env) || (() => {});
 
@@ -39,6 +39,6 @@ const readAndReplaceStaticFile = (filePath, env = process.env, callback) => {
 }
 
 module.exports = {
-  readAndReplaceStaticFile,
+  modifyContent,
   replaceEnvInString,
 }

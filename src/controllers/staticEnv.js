@@ -1,8 +1,8 @@
-const readAndReplaceStaticFile = require('../lib/replacEnv');
+const modifyContent = require('../lib/replacEnv');
 
-const replaceStaticEnv = (path, env) => {
+const sendModifiedContent = (path, env) => {
   return (req, res, next) => {
-    return readAndReplaceStaticFile(path, env, (err, data) => {
+    return modifyContent(path, env, (err, data) => {
       if (err) {
         return res.status(500).send(err);
       }
@@ -14,4 +14,4 @@ const replaceStaticEnv = (path, env) => {
 }
 
 
-module.exports = replaeStaticEnv;
+module.exports = sendModifiedContent;

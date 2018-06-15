@@ -1,7 +1,7 @@
-const { readAndReplaceStaticFile } = require('./lib/replaceEnv');
-const replaceStaticEnv = require('./controllers/staticEnv');
+const { modifyContent } = require('./lib/replaceEnv');
+const sendModifiedContent = require('./controllers/staticEnv');
 
 module.exports = {
-  replaceStaticEnv,
-  readAndReplaceStaticFile,
+  sendModifiedContent,
+  modifyContent,
 };
