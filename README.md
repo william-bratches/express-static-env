@@ -1,8 +1,15 @@
 # Static-Env
 Create dynamic static files via environmental variables in the `process.env`.
 
-### Getting Started
-Static-env can be used a replacement for `res.sendFile()`.
+### Installation
+
+$`npm install static-env`
+
+### Implementation
+`static-env` exposes two functions: `sendModifiedContent` and `modifyContent`. One is coupled to expressJS as an intended replacement for `res.sendFile`, the other can be used with any javascript framework to replace `process.env` variables inside a static file.
+
+#### sendModifiedContent - ExpressJS Version
+sendModifiedContent can be used a replacement for `res.sendFile()`.
 
 ```
 # an env var in the shell
@@ -16,11 +23,10 @@ const greeting = `Hello ${name}!`;
 ```
 
 ```
-// /src/routes.js
 const express = require("express")
 const { sendModifiedContent } = require('static-env');
 
-app.get('/content', (req, res) => sendModifiedContent("../public/js/helloWorld.js");
+app.get('/content', sendModifiedContent("../public/js/helloWorld.js");
 ```
 
 ```
@@ -30,25 +36,23 @@ const name = 'John';
 const greeting = `Hello ${name}!`;
 ```
 
-### Installation
+`sendModifiedContent` optionally takes an object that can replace the use of `process.env`. Note that this argument does not merge with `process.env`, and is a wholesale replacement. Use `Object.assign()` in your Implementation if your intention is to merge the object or override a single `process.env` variable.
 
-$`npm install static-env`
+```
+app.get('/content', sendModifiedContent("../public/js/helloWorld.js", { FIRST_NAME: "Tim" });
+```
 
-### Implementation
-`static-env` exposes two functions: `sendModifiedContent` and `modifyContent`. One is coupled to expressJS as an intended replacement for `res.sendFile`, the other can be used with any javascript framework to replace `process.env` variables inside a static file.
+```
+$ curl http://myContentServer.com/content
 
-##### sendModifiedContent - ExpressJS Version
+const name = 'Tim';
+const greeting = `Hello ${name}!`;
+```
 
+#### modifyContent - Generic Version (non-express)
+// TODO
 
-// two functions: one for express, on more generic
-// env variables
-
-
-
-
-##### modifyContent - Generic Version (non-express)
-
-##### Misc Notes
+#### Miscellaneous Notes
 * This can technically be used in any file, not just JS files, although it will still retain the `process.env` form.
 ```
 # TERMS_AND_CONDITIONS.txt
@@ -57,10 +61,19 @@ Valid as of process.env.CURRENT_DATE
 Lorem ipsum dolor sit amet...
 ```
 
-// designed for situations where loading javascript but have different api references for development and production servers.
+```
+$ curl http://myContentServer.com/terms
+
+Valid as of 01/01/76
+
+Lorem ipsum dolor sit amet...
+```
+
+* This library was originally invented to allow for hosted JS libraries (drop-in UIs google maps, stripe, or twitter widget) to avoid hardcoding external URLs for dev, staging, and prod versions.
 
 ### Tests
 
 To run tests, run `npm run test`.
 
 ### License
+This project is licensed under the MIT License.
