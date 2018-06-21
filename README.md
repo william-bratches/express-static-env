@@ -53,6 +53,8 @@ const greeting = `Hello ${name}!`;
 // TODO
 
 #### Miscellaneous Notes
+* Destructuring (`{ API_URL } = process.env`) currently does not work. 
+
 * This can technically be used in any file, not just JS files, although it will still retain the `process.env` form.
 ```
 # TERMS_AND_CONDITIONS.txt
