@@ -1,4 +1,4 @@
-const modifyContent = require('../lib/replacEnv');
+const { modifyContent } = require('../lib/replaceEnv');
 
 const sendModifiedContent = (path, env) => {
   return (req, res, next) => {
