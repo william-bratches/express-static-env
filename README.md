@@ -49,11 +49,37 @@ const name = 'Tim';
 const greeting = `Hello ${name}!`;
 ```
 
-#### modifyContent - Generic Version (non-express)
-// TODO
+#### modifyContent - Generic Version (non-express-specific)
+This will simply replace all `process.env` references in a static viable with their appropriate variable.
+
+```
+modifyContent(/public/js/helloWorld.js, (err, data), => {
+  console.log(data);
+}
+```
+
+```
+// /public/js/helloWorld.js
+const name = 'John';
+const greeting = `Hello ${name}!`;
+```
+
+It optionally takes an argument that can replace the use of `process.env` has the source fo variables. Note that this argument does not merge with `process.env`, and is a wholesale replacement. Use `Object.assign()` in your Implementation if your intention is to merge the object or override a single `process.env` variable.
+
+```
+modifyContent(/public/js/helloWorld.js, { FIRST_NAME: 'Tim' }, (err, data), => {
+  console.log(data);
+}
+```
+
+```
+// /public/js/helloWorld.js
+const name = 'Tim';
+const greeting = `Hello ${name}!`;
+```
 
 #### Miscellaneous Notes
-* Destructuring (`{ API_URL } = process.env`) currently does not work. 
+* Destructuring (`{ API_URL } = process.env`) currently does not work.
 
 * This can technically be used in any file, not just JS files, although it will still retain the `process.env` form.
 ```
